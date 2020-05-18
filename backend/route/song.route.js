@@ -28,7 +28,7 @@ songRoute.route('/').get((req, res) => {
 
 // Get single song
 songRoute.route('/get-song/:id').get((req, res) => {
-    SongModel.findById(req.params.id, (error, data) => {
+    songModel.findById(req.params.id, (error, data) => {
       if (error) {
         return next(error)
       } else {
@@ -40,7 +40,7 @@ songRoute.route('/get-song/:id').get((req, res) => {
   
   // Update song
   songRoute.route('/update-song/:id').put((req, res, next) => {
-    SongModel.findByIdAndUpdate(req.params.id, {
+    songModel.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, (error, data) => {
       if (error) {
@@ -55,10 +55,11 @@ songRoute.route('/get-song/:id').get((req, res) => {
   
   // Delete song
   songRoute.route('/delete-song/:id').delete((req, res, next) => {
-    SongModel.findByIdAndRemove(req.params.id, (error, data) => {
+    songModel.findByIdAndRemove(req.params.id, (error, data) => {
       if (error) {
         return next(error);
       } else {
+        console.log('erreur suppression !');
         res.status(200).json({
           msg: data
         })
